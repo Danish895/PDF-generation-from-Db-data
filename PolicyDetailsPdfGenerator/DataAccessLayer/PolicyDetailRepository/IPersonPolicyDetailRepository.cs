@@ -7,5 +7,6 @@ namespace PolicyDetailsPdfGenerator.DataAccessLayer.PolicyDetailRepository
         Task<HtmlTemplate> GetHtmlTemplate();
         
         Task<Person> GetPersonDetailAsync(string ProductCode, int PolicyNumber);
+        Task PeoplePdfInfoSavinginDb(PeoplePdfInformation peoplePdfInformation);
     }
 }

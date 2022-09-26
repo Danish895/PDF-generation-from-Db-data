@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace PolicyDetailsPdfGenerator.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,6 +22,28 @@ namespace PolicyDetailsPdfGenerator.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_HtmlTemplates", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PeoplePdfInformations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ObjectCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ObjectName = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReferenceType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ReferenceNumber = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FileExtension = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LanguageCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedUser = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PeoplePdfInformations", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,6 +71,9 @@ namespace PolicyDetailsPdfGenerator.Migrations
         {
             migrationBuilder.DropTable(
                 name: "HtmlTemplates");
+
+            migrationBuilder.DropTable(
+                name: "PeoplePdfInformations");
 
             migrationBuilder.DropTable(
                 name: "Persons");
