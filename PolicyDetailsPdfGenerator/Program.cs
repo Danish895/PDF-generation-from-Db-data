@@ -17,6 +17,7 @@ builder.Services.AddDbContext<PolicyDetailDbContext>(options => {
 
 builder.Services.AddScoped<IPersonPolicyDetailService, PersonPolicyDetailService>();
 builder.Services.AddScoped<IPersonPolicyDetailRepository, PersonPolicyDetailRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddScoped<HtmlToPdfConverterService>();
 

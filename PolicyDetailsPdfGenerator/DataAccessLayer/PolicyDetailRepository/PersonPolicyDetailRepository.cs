@@ -44,7 +44,6 @@ namespace PolicyDetailsPdfGenerator.DataAccessLayer.PolicyDetailRepository
             }
             else if (existing_peoplePdfInformation == null)
             {
-
                 PeoplePdfInformation new_peoplePdfInformation = new PeoplePdfInformation()
                 {
                     ReferenceNumber = peoplePdfInformation.ReferenceNumber,

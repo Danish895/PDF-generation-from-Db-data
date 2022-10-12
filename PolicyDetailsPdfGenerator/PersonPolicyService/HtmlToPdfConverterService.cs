@@ -8,10 +8,11 @@ namespace PolicyDetailsPdfGenerator.PersonPolicyService
     public class HtmlToPdfConverterService : PersonPolicyDetailService
     {
         //private IPersonPolicyDetailRepository _UserRepository;
+        public IEmailService _EmailService;
 
-        
-        public HtmlToPdfConverterService(IServiceProvider serviceProvider) : base(serviceProvider)
+        public HtmlToPdfConverterService(IServiceProvider serviceProvider, IEmailService emailService) : base(serviceProvider)
         {
+            _EmailService = emailService;
         }
         public async override Task GeneratePdf(string personDetailsInHtmlFormat, Person personDetail)
         {
@@ -53,9 +54,8 @@ namespace PolicyDetailsPdfGenerator.PersonPolicyService
             };
             byte[] streamResult = await page.PdfDataAsync(pdfOptions)
                     .ConfigureAwait(false);
-            Console.WriteLine(page);
 
-            Console.WriteLine(page);
+            
 
             var peoplePdfInformation = new PeoplePdfInformation()
             {
@@ -67,11 +67,17 @@ namespace PolicyDetailsPdfGenerator.PersonPolicyService
                 FileName = $"{personDetail.PolicyNumber}" + DateTime.Now.ToString(),
                 FileExtension = ".pdf",
                 LanguageCode = "km-KH",
-                CreatedUser = " Danish",
+                CreatedUser = " Admin",
                 CreatedDateTime = DateTime.Now
             };
             Console.WriteLine("Hello");
             await _UserRepository.PeoplePdfInfoSavinginDb(peoplePdfInformation);
+
+            bool emailSent =  _EmailService.SendEmail(streamResult);
+            if (emailSent)
+            {
+                Console.WriteLine("Email is sent");
+            }
         }
     }
 }

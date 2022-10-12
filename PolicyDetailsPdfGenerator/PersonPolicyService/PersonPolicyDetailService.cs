@@ -8,10 +8,12 @@ namespace PolicyDetailsPdfGenerator.PersonPolicyService
     public class PersonPolicyDetailService : IPersonPolicyDetailService
     {
         protected IPersonPolicyDetailRepository _UserRepository;
+        //public IEmailService _EmailService;
 
         public PersonPolicyDetailService(IServiceProvider serviceProvider)
         {
             _UserRepository = serviceProvider.GetRequiredService<IPersonPolicyDetailRepository>();
+            //_EmailService = emailService;
         }
 
         public async virtual Task GeneratePdf(string personDetailsInHtmlFormat, Person personDetail)
