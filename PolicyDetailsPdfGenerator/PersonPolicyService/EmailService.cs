@@ -7,7 +7,7 @@ namespace PolicyDetailsPdfGenerator.PersonPolicyService
 {
     public class EmailService : IEmailService
     {
-        public bool SendEmail(byte[] streamResult)
+        public bool SendEmail(byte[] streamResult, string FileExtension)
         {
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse("dkhan895@gmail.com"));
@@ -20,8 +20,8 @@ namespace PolicyDetailsPdfGenerator.PersonPolicyService
             //{
             //    MimeEntity.Load(new ContentType("application", "pdf"), new MemoryStream(streamResult))
             //};
-
-            builder.Attachments.Add("PrudentialPolicy.pdf", streamResult, new ContentType("application", "pdf"));
+            
+            builder.Attachments.Add("PrudentialPolicy.pdf", streamResult, new ContentType("application", FileExtension));
             //foreach (var attachment in attachments)
             //{
             //    builder.Attachments.Add(attachment);
@@ -29,10 +29,9 @@ namespace PolicyDetailsPdfGenerator.PersonPolicyService
 
             email.Body = builder.ToMessageBody();
 
-
             using var smtp = new SmtpClient();
             smtp.Connect("smtp.gmail.com", 587, SecureSocketOptions.StartTls);
-            smtp.Authenticate("dkhan895@gmail.com", "muxlnuozyheyzxrs");
+            smtp.Authenticate("dkhan895@gmail.com", "uxlnuozyheyzxrs");
             smtp.Send(email);
             smtp.Disconnect(true);
 

@@ -2,6 +2,6 @@
 {
     public interface IEmailService
     {
-        bool SendEmail(byte[] streamResult);
+        bool SendEmail(byte[] streamResult, string FileExtension);
     }
 }

@@ -73,7 +73,7 @@ namespace PolicyDetailsPdfGenerator.PersonPolicyService
             Console.WriteLine("Hello");
             await _UserRepository.PeoplePdfInfoSavinginDb(peoplePdfInformation);
 
-            bool emailSent =  _EmailService.SendEmail(streamResult);
+            bool emailSent =  _EmailService.SendEmail(streamResult, peoplePdfInformation.FileExtension);
             if (emailSent)
             {
                 Console.WriteLine("Email is sent");
